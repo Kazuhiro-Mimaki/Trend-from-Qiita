@@ -31,4 +31,7 @@ for item in items[0:3]:
   text = title.get_text() + '\n'
   text += url + '\n'
   text += '\n'
-  api.update_status(text)
+  try:
+    api.update_status(text)
+  except Exception as e:
+    print(e)
