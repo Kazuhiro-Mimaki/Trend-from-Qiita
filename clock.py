@@ -15,5 +15,4 @@ def scheduled_job():
 def scheduled_job():
   tweitter.post()
 
-if __name__ == "__main__":
-  sched.start()
+sched.start()
