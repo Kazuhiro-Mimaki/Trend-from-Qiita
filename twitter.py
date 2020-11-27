@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import json
 import tweepy
 import settings
+import random
 
 CK_KEY = settings.CK
 CS_KEY = settings.CS
@@ -14,24 +15,29 @@ auth = tweepy.OAuthHandler(CK_KEY, CS_KEY)
 auth.set_access_token(AT_KEY, AS_KEY)
 api = tweepy.API(auth)
 
-qiitaUrl = "https://qiita.com/"
-
 item_json = []
 result = []
 
-res = requests.get(qiitaUrl)
+# 取得するページ番号
+page_number = random.randrange(1, 101)
 
+qiitaUrl = f"https://qiita.com/search?page={page_number}&q=%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0&sort=like"
+
+res = requests.get(qiitaUrl)
 soup = BeautifulSoup(res.text, "html.parser")
 
-items = soup.find_all(class_="tr-Item")
+items = soup.find_all(class_="searchResult_main")
 
-for item in items[0:3]:
-  title = item.find(class_="tr-Item_title")
-  url = title['href']
-  text = title.get_text() + '\n'
-  text += url + '\n'
-  text += '\n'
-  try:
-    api.update_status(text)
-  except Exception as e:
-    print(e)
+# 取得する記事の番号
+item_number = random.randrange(1, 11)
+
+title = items[item_number].find(class_="searchResult_itemTitle")
+title_url = title.find("a")
+url = title_url['href']
+text = title.get_text() + '\n'
+text += 'https://qiita.com' + url + '\n'
+text += '\n'
+try:
+  api.update_status(text)
+except Exception as e:
+  print(e)
