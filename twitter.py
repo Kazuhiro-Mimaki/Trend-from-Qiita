@@ -38,15 +38,15 @@ url = title_url['href']
 text = title.get_text() + '\n'
 text += 'https://qiita.com' + url + '\n'
 text += '\n'
-# try:
+try:
   # twitterにpost
-#   api.update_status(text)
-# except Exception as e:
-#   print(e)
+  api.update_status(text)
+except Exception as e:
+  print(e)
 
 # slackにpost
 requests.post(SLACK_WEB_HOOK, data = json.dumps({
-    'text': u'{text}',  #通知内容
-    'username': u'Buzzrita',  #ユーザー名
-    'icon_emoji': u':buzzrita:',  #アイコン
+    'text': text,
+    'username': u'Buzzrita',
+    'icon_emoji': u':buzzrita:',
 }))
