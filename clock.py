@@ -9,10 +9,10 @@ def timed_job():
 
 @sched.scheduled_job('cron', day_of_week='mon-sun', hour=9)
 def scheduled_job():
-  tweitter.post()
+  twitter.post()
 
 @sched.scheduled_job('cron', day_of_week='mon-sun', hour=20)
 def scheduled_job():
-  tweitter.post()
+  twitter.post()
 
 sched.start()
