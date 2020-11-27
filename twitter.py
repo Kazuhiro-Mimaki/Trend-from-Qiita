@@ -38,8 +38,9 @@ url = title_url['href']
 text = title.get_text() + '\n'
 text += 'https://qiita.com' + url + '\n'
 text += '\n'
+
+# twitterにpost
 try:
-  # twitterにpost
   api.update_status(text)
 except Exception as e:
   print(e)
@@ -47,6 +48,7 @@ except Exception as e:
 # slackにpost
 requests.post(SLACK_WEB_HOOK, data = json.dumps({
     'text': text,
+    'unfurl_links': u'true',
     'username': u'Buzzrita',
     'icon_emoji': u':buzzrita:',
 }))
