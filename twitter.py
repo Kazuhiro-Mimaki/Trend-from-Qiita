@@ -9,6 +9,7 @@ CK_KEY = settings.CK
 CS_KEY = settings.CS
 AT_KEY = settings.AT
 AS_KEY = settings.AS
+SLACK_WEB_HOOK = settings.SWH
 
 # Twitterオブジェクトの生成
 auth = tweepy.OAuthHandler(CK_KEY, CS_KEY)
@@ -37,7 +38,15 @@ url = title_url['href']
 text = title.get_text() + '\n'
 text += 'https://qiita.com' + url + '\n'
 text += '\n'
-try:
-  api.update_status(text)
-except Exception as e:
-  print(e)
+# try:
+  # twitterにpost
+#   api.update_status(text)
+# except Exception as e:
+#   print(e)
+
+# slackにpost
+requests.post(SLACK_WEB_HOOK, data = json.dumps({
+    'text': u'{text}',  #通知内容
+    'username': u'Buzzrita',  #ユーザー名
+    'icon_emoji': u':buzzrita:',  #アイコン
+}))
