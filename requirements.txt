@@ -13,3 +13,6 @@ six==1.15.0
 soupsieve==2.0.1
 tweepy==3.9.0
 urllib3==1.26.2
+apscheduler==3.6.3
+pytz==2020.4
+tzlocal==2.1
