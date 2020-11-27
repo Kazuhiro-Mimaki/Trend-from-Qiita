@@ -5,14 +5,15 @@ sched = BlockingScheduler()
 
 @sched.scheduled_job('interval', minutes=1)
 def timed_job():
-    print('This job is run every three minutes.')
+  print('This job is run every three minutes.')
 
 @sched.scheduled_job('cron', day_of_week='mon-sun', hour=9)
 def scheduled_job():
-    tweitter.post()
+  tweitter.post()
 
 @sched.scheduled_job('cron', day_of_week='mon-sun', hour=20)
 def scheduled_job():
-    tweitter.post()
+  tweitter.post()
 
-sched.start()
+if __name__ == "__main__":
+  sched.start()
