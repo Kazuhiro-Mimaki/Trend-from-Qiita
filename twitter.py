@@ -47,7 +47,7 @@ text = 'test'
 #   print(e)
 
 # slackにpost
-if SLACK_WEB_HOOK
+if SLACK_WEB_HOOK:
   requests.post(SLACK_WEB_HOOK, data = json.dumps({
     'text': text,
     'unfurl_links': u'true',
