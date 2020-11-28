@@ -24,34 +24,34 @@ page_number = random.randrange(1, 101)
 
 qiitaUrl = f"https://qiita.com/search?page={page_number}&q=%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0&sort=like"
 
-# res = requests.get(qiitaUrl)
-# soup = BeautifulSoup(res.text, "html.parser")
+res = requests.get(qiitaUrl)
+soup = BeautifulSoup(res.text, "html.parser")
 
-# items = soup.find_all(class_="searchResult_main")
+items = soup.find_all(class_="searchResult_main")
 
 # 取得する記事の番号
-# item_number = random.randrange(0, 10)
+item_number = random.randrange(0, 10)
 
-# title = items[item_number].find(class_="searchResult_itemTitle")
-# title_url = title.find("a")
-# url = title_url['href']
-# text = title.get_text() + '\n'
-# text += 'https://qiita.com' + url + '\n'
-# text += '\n'
-text = 'test'
+title = items[item_number].find(class_="searchResult_itemTitle")
+title_url = title.find("a")
+url = title_url['href']
+text = title.get_text() + '\n'
+text += 'https://qiita.com' + url + '\n'
+text += '\n'
 
 # twitterにpost
-# try:
-#   api.update_status(text)
-# except Exception as e:
-#   print(e)
+try:
+  api.update_status(text)
+except Exception as e:
+  print(e)
 
 # slackにpost
-if SLACK_WEB_HOOK:
+try:
   requests.post(SLACK_WEB_HOOK, data = json.dumps({
     'text': text,
     'unfurl_links': u'true',
     'username': u'Buzzrita',
     'icon_emoji': u':buzzrita:',
   }))
-print('Something went wrong')
+except Exception as e:
+  print(e)
