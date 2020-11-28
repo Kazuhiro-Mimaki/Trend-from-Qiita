@@ -47,12 +47,11 @@ text = 'test'
 #   print(e)
 
 # slackにpost
-try:
+if SLACK_WEB_HOOK
   requests.post(SLACK_WEB_HOOK, data = json.dumps({
     'text': text,
     'unfurl_links': u'true',
     'username': u'Buzzrita',
     'icon_emoji': u':buzzrita:',
   }))
-except Exception as e:
-  print(e)
+print('Something went wrong')
