@@ -40,10 +40,10 @@ text += 'https://qiita.com' + url + '\n'
 text += '\n'
 
 # twitterにpost
-try:
-  api.update_status(text)
-except Exception as e:
-  print(e)
+# try:
+#   api.update_status(text)
+# except Exception as e:
+#   print(e)
 
 # slackにpost
 requests.post(SLACK_WEB_HOOK, data = json.dumps({
