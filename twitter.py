@@ -16,9 +16,6 @@ auth = tweepy.OAuthHandler(CK_KEY, CS_KEY)
 auth.set_access_token(AT_KEY, AS_KEY)
 api = tweepy.API(auth)
 
-item_json = []
-result = []
-
 # 取得するページ番号
 page_number = random.randrange(1, 101)
 
