@@ -1,2 +1,2 @@
-web: python twitter.py
-clock: python clock.py
+web: python3 twitter.py
+clock: python3 clock.py
