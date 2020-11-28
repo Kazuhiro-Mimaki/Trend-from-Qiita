@@ -22,7 +22,13 @@ result = []
 # 取得するページ番号
 page_number = random.randrange(1, 101)
 
-qiitaUrl = f"https://qiita.com/search?page={page_number}&q=%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0&sort=like"
+programming = "%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0"
+engineer = "%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2"
+
+topics = [programming, engineer]
+currentTopic = topics[random.randrange(0,2)]
+
+qiitaUrl = f"https://qiita.com/search?page={page_number}&q={currentTopic}&sort=like"
 
 res = requests.get(qiitaUrl)
 soup = BeautifulSoup(res.text, "html.parser")
@@ -38,6 +44,8 @@ url = title_url['href']
 text = title.get_text() + '\n'
 text += 'https://qiita.com' + url + '\n'
 text += '\n'
+
+print(text)
 
 # twitterにpost
 try:
