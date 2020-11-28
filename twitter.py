@@ -30,7 +30,7 @@ soup = BeautifulSoup(res.text, "html.parser")
 items = soup.find_all(class_="searchResult_main")
 
 # 取得する記事の番号
-item_number = random.randrange(1, 11)
+item_number = random.randrange(0, 10)
 
 title = items[item_number].find(class_="searchResult_itemTitle")
 title_url = title.find("a")
