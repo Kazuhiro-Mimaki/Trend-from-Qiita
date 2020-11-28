@@ -48,7 +48,7 @@ text += '\n'
 # slackにpost
 requests.post(SLACK_WEB_HOOK, data = json.dumps({
     'text': text,
-    'unfurl_links': u'true',
+    # 'unfurl_links': u'true',
     'username': u'Buzzrita',
     'icon_emoji': u':buzzrita:',
 }))
