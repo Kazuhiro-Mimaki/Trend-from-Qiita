@@ -1,8 +1,12 @@
 import tweepy
 import scraping
+from scraping import TwitterClient
+
+twitterClient = TwitterClient()
 
 # twitterにpost
 try:
-  scraping.api.update_status(scraping.text)
+  twitterClient.api.update_status(twitterClient.scraping())
 except Exception as e:
   print(e)
+  raise e
