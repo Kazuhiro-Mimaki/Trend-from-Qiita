@@ -1,17 +1,13 @@
 import requests
-from bs4 import BeautifulSoup
 import tweepy
-import settings
 import random
+from bs4 import BeautifulSoup
+from config import Congfig
 
-CK_KEY = settings.CK
-CS_KEY = settings.CS
-AT_KEY = settings.AT
-AS_KEY = settings.AS
 
 # Twitterオブジェクトの生成
-auth = tweepy.OAuthHandler(CK_KEY, CS_KEY)
-auth.set_access_token(AT_KEY, AS_KEY)
+auth = tweepy.OAuthHandler(Congfig.CONSUMER_KEY, Congfig.CONSUMER_SECRET)
+auth.set_access_token(Congfig.ACCESS_TOKEN_KEY, Congfig.ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
 # 取得するページ番号
@@ -23,7 +19,7 @@ engineer = "%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2"
 topics = [programming, engineer]
 currentTopic = topics[random.randrange(0,2)]
 
-qiitaUrl = f"https://qiita.com/search?page={page_number}&q={currentTopic}&sort=like"
+qiitaUrl = f"{Congfig.QIITA_URL}/search?page={page_number}&q={currentTopic}&sort=like"
 
 res = requests.get(qiitaUrl)
 soup = BeautifulSoup(res.text, "html.parser")
@@ -37,5 +33,4 @@ title = items[item_number].find(class_="searchResult_itemTitle")
 title_url = title.find("a")
 url = title_url['href']
 text = title.get_text() + '\n'
-text += 'https://qiita.com' + url + '\n'
-text += '\n'
+text += f'{Congfig.QIITA_URL}{url}\n\n'
